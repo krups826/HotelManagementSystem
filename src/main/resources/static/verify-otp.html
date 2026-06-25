@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0">
+
+    <title>Verify OTP</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+</head>
+<body>
+
+<nav>
+    <h1>GRAND HEAVEN</h1>
+</nav>
+
+<div class="container">
+
+    <h2>Email Verification</h2>
+
+    <form id="otpForm">
+
+        <label>Email</label>
+
+        <input type="email"
+               id="email"
+               required>
+
+        <label>OTP</label>
+
+        <input type="text"
+               id="otp"
+               required>
+
+        <button type="submit">
+            Verify OTP
+        </button>
+
+    </form>
+
+    <p id="msg"></p>
+
+</div>
+
+<script>
+
+    document.getElementById("otpForm")
+    .addEventListener("submit",
+    function(e){
+
+        e.preventDefault();
+
+        const email =
+            document.getElementById(
+                "email").value;
+
+        const otp =
+            document.getElementById(
+                "otp").value;
+
+        fetch(
+          `http://localhost:8080/customers/verify?email=${email}&otp=${otp}`,
+          {
+            method: "POST"
+          }
+        )
+
+        .then(response =>
+            response.text())
+
+        .then(data => {
+
+            const msg =
+                document.getElementById(
+                    "msg");
+
+            if(data === "Verified"){
+
+                msg.style.color =
+                    "green";
+
+                msg.innerText =
+                    "Email Verified Successfully!";
+
+                setTimeout(() => {
+
+                    window.location.href =
+                        "login.html";
+
+                }, 1500);
+
+            }
+            else{
+
+                msg.style.color =
+                    "red";
+
+                msg.innerText =
+                    "Invalid OTP";
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+            document.getElementById(
+                "msg").innerText =
+                "Verification Failed";
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

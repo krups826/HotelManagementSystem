@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment | Grand Heaven</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html" style="text-decoration: none;"><h1>GRAND HEAVEN</h1></a>
+</nav>
+
+<div class="container">
+    <h2 style="text-align: center; font-family: 'Outfit', sans-serif; margin-bottom: 2rem;">Payment Details</h2>
+    
+    <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 1rem; border-radius: 12px; margin-bottom: 2rem; color: #10b981; font-size: 0.9rem; text-align: center;">
+        🔒 This is a secure SSL encrypted payment gateway.
+    </div>
+
+    <form id="paymentForm">
+        <label>Payable Amount (INR)</label>
+        <input type="number" id="amount" value="2500" readOnly style="opacity: 0.7; cursor: not-allowed;">
+
+        <label>Payment Method</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="padding: 1rem; border: 2px solid var(--primary); border-radius: 12px; text-align: center; cursor: pointer; background: rgba(14, 165, 233, 0.05);">
+                💳 Card
+            </div>
+            <div style="padding: 1rem; border: 1px solid var(--border-card); border-radius: 12px; text-align: center; cursor: pointer; opacity: 0.6;">
+                📱 UPI
+            </div>
+        </div>
+
+        <label>Payment Status</label>
+        <select id="paymentStatus" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-card); border-radius: 12px; color: white; margin-bottom: 1.5rem;">
+            <option>Paid</option>
+            <option>Pending</option>
+        </select>
+
+        <button type="button" onclick="handlePayment()" id="payBtn">Finalize Payment</button>
+    </form>
+
+    <div id="msg" style="text-align: center; margin-top: 1.5rem; font-weight: 500;"></div>
+</div>
+
+<script>
+    function handlePayment() {
+        const btn = document.getElementById("payBtn");
+        const msg = document.getElementById("msg");
+        
+        btn.innerText = "Processing...";
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            msg.style.color = "#10b981";
+            msg.innerText = "Payment Successful! Redirecting to Dashboard...";
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 2000);
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>

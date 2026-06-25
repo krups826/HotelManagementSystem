@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Grand Heaven</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html" style="text-decoration: none;"><h1>GRAND HEAVEN</h1></a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 style="text-align: center; font-family: 'Outfit', sans-serif; margin-bottom: 2rem;">Welcome Back</h2>
+    
+    <form id="loginForm">
+        <label>Email</label>
+        <input type="text" id="email" placeholder="Enter your Email" required>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+
+        <button type="submit" style="margin-top: 1rem;">Sign In</button>
+    </form>
+
+    <div id="loginMsg" style="text-align: center; margin-top: 1.5rem; font-weight: 500;"></div>
+
+    <p style="text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+        Don't have an account? <a href="register.html" style="color: var(--primary); text-decoration: none;">Register here</a>
+    </p>
+</div>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+     e.preventDefault();
+
+     const msg = document.getElementById("loginMsg");
+     msg.style.color = "var(--primary)";
+     msg.innerText = "Authenticating...";
+
+     const loginData = {
+         email: document.getElementById("email").value,
+         password: document.getElementById("password").value
+     };
+
+     fetch("http://localhost:8080/customers/login", {
+         method: "POST",
+         headers: {
+             "Content-Type": "application/json"
+         },
+         body: JSON.stringify(loginData)
+     })
+
+     .then(response => response.json())
+
+     .then(data => {
+
+         if(data != null){
+
+             msg.style.color = "#10b981";
+             msg.innerText = "Success! Redirecting...";
+
+             // Save customer info
+             localStorage.setItem("customerId", data.customerId);
+             localStorage.setItem("customerName", data.name);
+
+             // Redirect to dashboard
+             setTimeout(() => {
+                 window.location.href = "dashboard.html";
+             }, 1000);
+
+         } else {
+
+             msg.style.color = "red";
+             msg.innerText = "Invalid Email or Password";
+
+         }
+
+     })
+
+     .catch(error => {
+
+         msg.style.color = "red";
+         msg.innerText = "Login Failed";
+
+         console.log(error);
+
+     });
+
+ });
+</script>
+
+</body>
+</html>

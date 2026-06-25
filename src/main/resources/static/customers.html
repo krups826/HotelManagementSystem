@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Customers</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<script>
+    if(localStorage.getItem("admin") == null){
+        alert("Access Denied!");
+        window.location.href = "admin-login.html";
+    }
+</script>
+
+<nav>
+    <a href="admin.html" style="text-decoration:none;">
+        <h1>GRAND HEAVEN</h1>
+    </a>
+
+    <div class="nav-links">
+        <a href="admin.html">Dashboard</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="dashboard">
+
+    <h2 style="margin-bottom: 2rem;">
+        Customer Management
+    </h2>
+
+    <table
+            style="width:100%;
+           border-collapse: collapse;
+           background:white;
+           border-radius:10px;">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+
+        <tbody id="customerTable">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+    function logout(){
+
+        localStorage.removeItem("admin");
+
+        window.location.href =
+                "admin-login.html";
+
+    }
+
+    fetch("http://localhost:8080/customers")
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        let rows = "";
+
+        data.forEach(customer => {
+
+            rows += `
+
+            <tr>
+
+                <td>${customer.customerId}</td>
+
+                <td>${customer.name}</td>
+
+                <td>${customer.email}</td>
+
+                <td>${customer.phone}</td>
+
+                <td>${customer.address}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById(
+            "customerTable").innerHTML = rows;
+
+    });
+
+</script>
+
+</body>
+</html>

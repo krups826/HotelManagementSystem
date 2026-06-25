@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Grand Heaven</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html" style="text-decoration: none;"><h1>GRAND HEAVEN <span style="font-size: 0.7rem; font-weight: 400; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-left: 10px;">Admin Console</span></h1></a>
+    <div class="nav-links">
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="dashboard">
+    <header style="margin-bottom: 4rem;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Operational Overview</h2>
+        <p style="color: var(--text-muted);">Real-time management systems for Grand Heaven hospitality.</p>
+    </header>
+
+    <div class="card-container">
+        <div class="card">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔑</div>
+            <h3>Inventory Management</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Update room availability, pricing, and suite details.</p>
+            <button class="secondary"
+                    onclick="window.location.href='rooms.html'">
+                Manage Rooms
+            </button>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">👥</div>
+            <h3>Customer Relations</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">View and manage guest profiles and contact information.</p>
+            <button class="secondary"
+                    onclick="window.location.href='customers.html'">
+                Manage Guests
+            </button>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">📑</div>
+            <h3>Reservation Desk</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Process bookings, check-ins, and room assignments.</p>
+            <button
+                    onclick="window.location.href='history.html'">
+                View Desk
+            </button>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div>
+            <h3>Financial Ledger</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Track payments, revenue analytics, and invoices.</p>
+            <button class="secondary"
+                    onclick="window.location.href='payment.html'">
+                Revenue Reports
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Stats for Admin -->
+    <div style="margin-top: 4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div style="background: rgba(14, 165, 233, 0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(14, 165, 233, 0.1);">
+            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Occupancy</div>
+            <div style="font-size: 1.5rem; font-weight: 700;">84%</div>
+        </div>
+        <div style="background: rgba(16, 185, 129, 0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(16, 185, 129, 0.1);">
+            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">RevPAR</div>
+            <div style="font-size: 1.5rem; font-weight: 700;">₹4,200</div>
+        </div>
+        <div style="background: rgba(245, 158, 11, 0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(245, 158, 11, 0.1);">
+            <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Pending tasks</div>
+            <div style="font-size: 1.5rem; font-weight: 700;">12</div>
+        </div>
+    </div>
+</div>
+<script>
+
+    if(localStorage.getItem("admin") == null){
+
+        alert("Access Denied!");
+
+        window.location.href = "admin-login.html";
+
+    }
+
+</script>
+</body>
+
+</html>
